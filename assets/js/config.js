@@ -12,7 +12,7 @@ window.SITE = {
   address: null,          // shop / lot address
   hours: null,            // shop drop-off hours
 
-  pricePerDay: null,      // number, e.g. 9
+  pricePerDay: 8,         // number
   pricePerWeek: null,     // number
   airportLotPerDay: 12,   // comparison figure from Brandon
 
