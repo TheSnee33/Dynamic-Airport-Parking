@@ -204,3 +204,8 @@ fieldset .row, fieldset > div { margin-bottom: 14px; }
 section.block:has(.step-num) > .wrap > .eyebrow,
 section.block:has(.step-num) > .wrap > h2 { text-align: center; }
 .card:has(> .step-num), .card .body:has(> .step-num) { text-align: center; }
+
+/* Staff board */
+.staff-filters { display: flex; gap: 8px; flex-wrap: wrap; }
+.staff-edit { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; align-items: center; }
+.staff-edit select, .staff-edit input { flex: 1 1 200px; min-width: 0; }

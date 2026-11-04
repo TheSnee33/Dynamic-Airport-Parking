@@ -5,6 +5,13 @@ service cloud.firestore {
     function signedIn() { return request.auth != null; }
     function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
 
+    // Staff = a verified email listed in the config/staff document: { emails: ["name@example.com", ...] }.
+    // That document is not readable by clients (default deny), so the list stays private.
+    function isStaff() {
+      return signedIn() && request.auth.token.email_verified == true
+        && request.auth.token.email.lower() in get(/databases/$(database)/documents/config/staff).data.emails;
+    }
+
     // Prices are public so the booking page can show an estimate. Edit them in the Firebase console:
     //   settings/pricing  →  { perDay: 8, perWeek: null }
     match /settings/{doc} {
@@ -39,7 +46,7 @@ service cloud.firestore {
     // Bookings. Customers create their own (always unpaid + requested), read their own, and can ONLY
     // flip status to cancel_requested. Payment fields are written by Cloud Functions (admin SDK) alone.
     match /reservations/{id} {
-      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow read: if (signedIn() && resource.data.uid == request.auth.uid) || isStaff();
       allow create: if signedIn()
         && request.resource.data.uid == request.auth.uid
         && request.resource.data.keys().hasOnly([
@@ -56,12 +63,17 @@ service cloud.firestore {
         && resource.data.status in ['requested', 'confirmed']
         && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
         && request.resource.data.status == 'cancel_requested';
+      // Staff can change status and keep an internal note. They cannot touch payment fields or customer data.
+      allow update: if isStaff()
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'staffNote', 'updatedAt', 'updatedBy'])
+        && request.resource.data.status in ['requested', 'confirmed', 'checked_in', 'picked_up', 'completed', 'cancel_requested', 'cancelled']
+        && (!('staffNote' in request.resource.data) || (request.resource.data.staffNote is string && request.resource.data.staffNote.size() <= 500));
       allow delete: if false;
     }
 
     // Payment records: written only by Cloud Functions. Customers can read their own receipts.
     match /payments/{id} {
-      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow read: if (signedIn() && resource.data.uid == request.auth.uid) || isStaff();
       allow write: if false;
     }
 
