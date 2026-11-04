@@ -3,62 +3,83 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Reserve a Spot — Dynamic Airport Parking</title>
-<meta name="description" content="Reserve your parking spot and shuttle to PVU.">
+<title>Book a stay — Dynamic Airport Parking</title>
+<meta name="description" content="Book parking with a shuttle to PVU. Log in, choose your dates and pay online.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="reserve">
-<div class="page-hero"><div class="wrap"><h1>Reserve a spot</h1><p>Tell us when you're leaving and we'll confirm by text or email.</p></div></div>
+<div class="page-hero"><div class="wrap"><h1>Book a stay</h1><p>Pick your dates, choose your vehicle, and pay when you're ready.</p></div></div>
 
 <section class="block">
-  <div class="wrap" style="max-width:760px">
-    <div id="form-msg" class="form-msg" role="status"></div>
-    <form id="reserve-form" class="reserve">
-      <fieldset><legend>You</legend>
-        <div class="row">
-          <div><label for="name">Full name</label><input id="name" name="name" required autocomplete="name"></div>
-          <div><label for="phone">Mobile phone</label><input id="phone" name="phone" type="tel" required autocomplete="tel"></div>
-          <div><label for="email">Email</label><input id="email" name="email" type="email" required autocomplete="email"></div>
-        </div>
-      </fieldset>
+  <div class="wrap">
+    <div id="unconfigured"></div>
 
-      <fieldset><legend>Vehicle</legend>
-        <div class="row">
-          <div><label for="year">Year</label><input id="year" name="year" inputmode="numeric" required></div>
-          <div><label for="make">Make</label><input id="make" name="make" required></div>
-          <div><label for="model">Model</label><input id="model" name="model" required></div>
-          <div><label for="color">Color</label><input id="color" name="color"></div>
-          <div><label for="plate">License plate</label><input id="plate" name="plate" required></div>
-        </div>
-      </fieldset>
+    <div id="gate" class="form-card" style="display:none;text-align:center">
+      <h3>Log in to book</h3>
+      <p class="muted">Bookings live in your account so you can see status and pay from one place.</p>
+      <div class="cta" style="justify-content:center">
+        <a class="btn" id="gate-login" href="login.html">Log in</a>
+        <a class="btn dark" id="gate-register" href="register.html">Create an account</a>
+      </div>
+    </div>
 
-      <fieldset><legend>Trip</legend>
-        <div class="row">
-          <div><label for="dropoff">Drop-off date &amp; time</label><input id="dropoff" name="dropoff" type="datetime-local" required></div>
-          <div><label for="pickup">Return date &amp; time</label><input id="pickup" name="pickup" type="datetime-local" required></div>
-          <div><label for="airline">Airline</label><input id="airline" name="airline"></div>
-          <div><label for="outflight">Departing flight #</label><input id="outflight" name="outflight"></div>
-          <div><label for="retflight">Returning flight #</label><input id="retflight" name="retflight"></div>
-        </div>
-      </fieldset>
+    <div id="done" class="form-card" style="display:none;text-align:center">
+      <div style="font-size:3rem">🚗</div>
+      <h3>Booking request received</h3>
+      <p class="muted">We'll confirm by text or email. You can pay now or later from your account.</p>
+      <div class="cta" style="justify-content:center">
+        <button class="btn" id="pay-now" type="button">Pay now</button>
+        <a class="btn dark" href="account.html">Go to my account</a>
+      </div>
+    </div>
 
-      <fieldset><legend>Keys &amp; notes</legend>
-        <div class="row">
-          <div id="keys-note"><label for="keys">Leaving your keys with us?</label>
-            <select id="keys" name="keys"><option value="yes">Yes</option><option value="no">No</option></select></div>
-        </div>
-        <div style="margin-bottom:14px"><label for="notes">Anything we should know?</label><textarea id="notes" name="notes" rows="3"></textarea></div>
-        <label class="check" style="margin-bottom:14px"><input type="checkbox" name="sms" checked> It's OK to text me about my reservation and my car.</label>
-      </fieldset>
+    <div id="formwrap" class="form-card wide" style="display:none">
+      <div id="msg" class="msg" role="alert"></div>
+      <form id="form" novalidate>
+        <fieldset><legend>Dates</legend>
+          <div class="row">
+            <div><label for="dropoff">Drop-off</label><input id="dropoff" type="datetime-local" required></div>
+            <div><label for="pickup">Return (landing time)</label><input id="pickup" type="datetime-local" required></div>
+          </div>
+          <div class="quote"><span class="muted" id="quote-days">Choose your dates</span><b id="quote-total">—</b></div>
+          <div class="hint" style="margin:6px 0 14px">Estimate only. The final total is calculated when you pay.</div>
+        </fieldset>
 
-      <button class="btn" type="submit">Request my spot</button>
-      <p style="font-size:.85rem;color:var(--muted)">A request isn't a confirmed reservation until we confirm it. See <a href="terms.html">terms &amp; policies</a>.</p>
-    </form>
+        <fieldset><legend>Vehicle</legend>
+          <div id="veh-pick-wrap" style="display:none"><label for="veh-pick">Saved vehicles</label><select id="veh-pick"></select></div>
+          <div id="veh-new">
+            <div class="row">
+              <div><label for="year">Year</label><input id="year" inputmode="numeric"></div>
+              <div><label for="make">Make</label><input id="make"></div>
+              <div><label for="model">Model</label><input id="model"></div>
+              <div><label for="color">Color</label><input id="color"></div>
+              <div><label for="plate">License plate</label><input id="plate"></div>
+            </div>
+            <label class="check" style="margin-bottom:14px"><input type="checkbox" id="save-veh" checked> Save this vehicle to my account</label>
+          </div>
+        </fieldset>
+
+        <fieldset><legend>Flights &amp; notes</legend>
+          <div class="row">
+            <div><label for="airline">Airline</label><input id="airline"></div>
+            <div><label for="outflight">Departing flight #</label><input id="outflight"></div>
+            <div><label for="retflight">Returning flight #</label><input id="retflight"></div>
+          </div>
+          <div id="keys-wrap" class="row"><div><label for="keys">Leaving your keys with us?</label><select id="keys"><option value="yes">Yes</option><option value="no">No</option></select></div></div>
+          <div><label for="notes">Anything we should know?</label><textarea id="notes" rows="3" maxlength="900"></textarea></div>
+        </fieldset>
+
+        <button class="btn block" type="submit" id="go">Request my booking</button>
+        <div class="form-foot">A request isn't confirmed until we confirm it. See <a href="terms.html">terms &amp; policies</a>.</div>
+      </form>
+    </div>
   </div>
 </section>
 
 <script src="assets/js/config.js"></script>
-<script src="assets/js/main.js"></script>
-<script src="assets/js/reserve.js"></script>
+<script type="module" src="assets/js/main.js"></script>
+<script type="module" src="assets/js/reserve.js"></script>
 </body>
 </html>

@@ -2,23 +2,69 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
 
-    // Public site can only CREATE a well-formed reservation request. Nobody can read, edit or delete from the web.
-    // Manage reservations from the Firebase console (or add an admin dashboard with Auth later).
-    match /reservations/{id} {
-      allow read, update, delete: if false;
-      allow create: if request.resource.data.keys().hasOnly([
-          'name','phone','email','vehicle','dropOff','pickup','flight',
-          'leavingKeys','textUpdatesOk','notes','status','createdAt'])
-        && request.resource.data.name is string && request.resource.data.name.size() < 120
-        && request.resource.data.phone is string && request.resource.data.phone.size() < 40
-        && request.resource.data.email is string && request.resource.data.email.size() < 200
-        && request.resource.data.notes is string && request.resource.data.notes.size() < 1000
-        && request.resource.data.status == 'new'
-        && request.resource.data.createdAt == request.time;
+    function signedIn() { return request.auth != null; }
+    function isOwner(uid) { return signedIn() && request.auth.uid == uid; }
+
+    // Prices are public so the booking page can show an estimate. Edit them in the Firebase console:
+    //   settings/pricing  →  { perDay: 8, perWeek: null }
+    match /settings/{doc} {
+      allow read: if true;
+      allow write: if false;
     }
 
-    match /{document=**} {
-      allow read, write: if false;
+    // Customer profile, created at registration. Customers can read/edit only their own.
+    match /customers/{uid} {
+      allow create: if isOwner(uid)
+        && request.resource.data.keys().hasOnly(['name', 'phone', 'email', 'smsOk', 'createdAt'])
+        && request.resource.data.name is string && request.resource.data.name.size() < 120
+        && request.resource.data.phone is string && request.resource.data.phone.size() < 40
+        && request.resource.data.email == request.auth.token.email.lower()
+        && request.resource.data.smsOk is bool
+        && request.resource.data.createdAt == request.time;
+      allow read: if isOwner(uid);
+      allow update: if isOwner(uid)
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['name', 'phone', 'smsOk'])
+        && request.resource.data.name is string && request.resource.data.name.size() < 120
+        && request.resource.data.phone is string && request.resource.data.phone.size() < 40;
+      allow delete: if false;
+
+      match /vehicles/{vid} {
+        allow read, delete: if isOwner(uid);
+        allow create, update: if isOwner(uid)
+          && request.resource.data.keys().hasOnly(['year', 'make', 'model', 'color', 'plate'])
+          && request.resource.data.plate is string && request.resource.data.plate.size() < 20;
+      }
     }
+
+    // Bookings. Customers create their own (always unpaid + requested), read their own, and can ONLY
+    // flip status to cancel_requested. Payment fields are written by Cloud Functions (admin SDK) alone.
+    match /reservations/{id} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.keys().hasOnly([
+            'uid', 'customerName', 'customerPhone', 'customerEmail', 'vehicle', 'dropOff', 'pickup',
+            'days', 'quotedTotal', 'flight', 'leavingKeys', 'notes', 'status', 'paymentStatus', 'createdAt'])
+        && request.resource.data.status == 'requested'
+        && request.resource.data.paymentStatus == 'unpaid'
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.dropOff is timestamp && request.resource.data.pickup is timestamp
+        && request.resource.data.pickup > request.resource.data.dropOff
+        && request.resource.data.notes is string && request.resource.data.notes.size() < 1000
+        && request.resource.data.vehicle is map;
+      allow update: if signedIn() && resource.data.uid == request.auth.uid
+        && resource.data.status in ['requested', 'confirmed']
+        && request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status'])
+        && request.resource.data.status == 'cancel_requested';
+      allow delete: if false;
+    }
+
+    // Payment records: written only by Cloud Functions. Customers can read their own receipts.
+    match /payments/{id} {
+      allow read: if signedIn() && resource.data.uid == request.auth.uid;
+      allow write: if false;
+    }
+
+    match /{document=**} { allow read, write: if false; }
   }
 }

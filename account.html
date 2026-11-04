@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My account — Dynamic Airport Parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="account">
+<div class="page-hero"><div class="wrap"><h1 id="hello">My account</h1><p>Your bookings, vehicles and payments.</p></div></div>
+
+<section class="block">
+  <div class="wrap">
+    <div id="unconfigured"></div>
+    <div id="msg" class="msg" role="status" style="margin-bottom:18px"></div>
+    <div class="acct-grid" id="app" style="display:none">
+      <aside>
+        <div class="card" style="margin-bottom:22px">
+          <h3>Profile</h3>
+          <form id="profile">
+            <div><label for="p-name">Name</label><input id="p-name" required></div>
+            <div><label for="p-phone">Mobile phone</label><input id="p-phone" type="tel" required></div>
+            <div><label>Email</label><input id="p-email" disabled>
+              <div class="hint" id="verify"></div></div>
+            <label class="check"><input type="checkbox" id="p-sms"> Text me booking updates</label>
+            <button class="btn small" type="submit">Save profile</button>
+          </form>
+        </div>
+        <div class="card" style="margin-bottom:22px">
+          <h3>My vehicles</h3>
+          <div id="vehicles"></div>
+          <form id="veh-form" style="margin-top:14px">
+            <div class="row"><div><label for="v-year">Year</label><input id="v-year" inputmode="numeric" required></div><div><label for="v-make">Make</label><input id="v-make" required></div></div>
+            <div class="row"><div><label for="v-model">Model</label><input id="v-model" required></div><div><label for="v-color">Color</label><input id="v-color"></div></div>
+            <div><label for="v-plate">License plate</label><input id="v-plate" required></div>
+            <button class="btn small dark" type="submit">Add vehicle</button>
+          </form>
+        </div>
+        <button class="btn ghost block" id="signout" type="button">Log out</button>
+      </aside>
+
+      <div>
+        <div class="card">
+          <div class="res-top" style="margin-bottom:16px"><h3 style="margin:0">My bookings</h3><a class="btn small" href="reserve.html">New booking</a></div>
+          <div id="reservations"><div class="spinner"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/config.js"></script>
+<script type="module" src="assets/js/main.js"></script>
+<script type="module" src="assets/js/account.js"></script>
+</body>
+</html>

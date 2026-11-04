@@ -4,34 +4,40 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Pricing — Dynamic Airport Parking</title>
-<meta name="description" content="Simple daily and weekly rates for PVU airport parking with shuttle included.">
+<meta name="description" content="Simple daily and weekly rates for parking with a shuttle to PVU.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="pricing">
-<div class="page-hero"><div class="wrap"><h1>Pricing</h1><p>Shuttle included. No surprises.</p></div></div>
+<div class="page-hero"><div class="wrap"><h1>Pricing</h1><p>Shuttle included. Pay online, however you like.</p></div></div>
 
 <section class="block">
   <div class="wrap grid three">
-    <div class="card"><h3>Daily</h3><div class="price"><span data-fill="price-day"></span> <small>/ day</small></div><p style="margin-top:14px">Best for short trips.</p></div>
-    <div class="card"><h3>Weekly</h3><div class="price"><span data-fill="price-week"></span> <small>/ 7 days</small></div><p style="margin-top:14px">Best for longer trips.</p></div>
-    <div class="compare"><h3>PVU airport lot</h3><div class="price" style="color:#fff"><span data-fill="airport-lot"></span> <small style="color:#c3cfde">/ day</small></div><p style="margin-top:14px">For comparison.</p></div>
+    <div class="card"><h3>Daily</h3><div class="price"><span data-fill="price-day"></span> <small>/ day</small></div><p class="muted" style="margin-top:14px">Great for short trips.</p></div>
+    <div class="card"><h3>Weekly</h3><div class="price"><span data-fill="price-week"></span> <small>/ 7 days</small></div><p class="muted" style="margin-top:14px">Better value for longer trips.</p></div>
+    <div class="card"><h3>PVU airport lot</h3><div class="price" style="color:var(--muted)"><span data-fill="airport-lot"></span> <small>/ day</small></div><p class="muted" style="margin-top:14px">For comparison.</p></div>
   </div>
 </section>
 
 <section class="block alt">
-  <div class="wrap">
-    <h2>What's included</h2>
-    <ul class="ticks">
-      <li>Parking at our shop lot (<span data-fill="security"></span>)</li>
-      <li>Shuttle to and from <span data-fill="airport"></span></li>
-      <li>Text updates on your car</li>
-    </ul>
-    <p>Optional services while you're away are quoted separately and only done with your text approval.</p>
-    <a class="btn" href="reserve.html">Reserve a spot</a>
+  <div class="wrap grid split">
+    <div>
+      <h2>What's included</h2>
+      <ul class="ticks">
+        <li>Parking on our shop lot (<span data-fill="security"></span>)</li>
+        <li>Shuttle to and from <span data-fill="airport-long"></span></li>
+        <li>Text updates on your car</li>
+        <li>Pay by card, Cash App, PayPal or Venmo</li>
+      </ul>
+      <p class="muted">Optional services while you're away are quoted separately and only done with your text approval.</p>
+      <div class="cta"><a class="btn" href="reserve.html">Book a stay</a><a class="btn dark" href="account.html">Pay for a booking</a></div>
+    </div>
+    <div class="photo-frame"><img src="assets/img/hero-lot.svg" alt="Fenced, lit parking lot at night" loading="lazy"></div>
   </div>
 </section>
 
 <script src="assets/js/config.js"></script>
-<script src="assets/js/main.js"></script>
+<script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

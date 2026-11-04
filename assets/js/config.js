@@ -1,39 +1,45 @@
-// Single source of truth for every open question on the Launch Board.
-// Fill a value in and it shows up everywhere on the site.
-// Anything left as null renders as a highlighted "TBD" so nothing gets published by accident.
+// One place for every business detail, Firebase key and payment key.
+// Anything left null shows as a yellow "TBD" on the page so nothing unfinished goes live unnoticed.
 window.SITE = {
-  name: "Dynamic Airport Parking",          // Launch Board: name for the service (confirm)
-  parent: "Dynamic Collision Provo",
+  name: "Dynamic Airport Parking",
+  parent: "Dynamic Collision Repair",
   parentUrl: "https://dynamiccollisionprovo.com",
-  airport: "PVU (Provo Municipal Airport)",
+  airport: "PVU",
+  airportLong: "Provo Municipal Airport (PVU)",
 
-  phone: null,            // e.g. "(801) 555-0123"
+  phone: "(801) 377-7252",                         // from dynamiccollisionprovo.com
   email: null,
-  address: null,          // shop / lot address
-  hours: null,            // shop drop-off hours
+  address: "1671 S State St, Provo, UT 84606",     // from dynamiccollisionprovo.com
+  hours: "Mon–Fri, 8 AM–5 PM",                     // SHOP hours. Confirm drop-off hours for parking.
 
-  pricePerDay: 8,         // number
-  pricePerWeek: null,     // number
-  airportLotPerDay: 12,   // comparison figure from Brandon
+  pricePerDay: 8,
+  pricePerWeek: null,
+  airportLotPerDay: 12,
 
-  capacity: null,         // number of cars
-  security: { fenced: null, lit: null, camera: null },  // true / false / null
+  capacity: null,                                  // number of cars
+  security: { fenced: null, lit: null, camera: null },
 
   shuttle: { vehicle: null, hours: null, earlyLateFlights: null },
 
-  booking: "form",        // "form" | "call" | "both"  (reservation form is built; call/text shows once phone is set)
-  keysRequired: null,     // true / false
-  servicesWhileAway: null,// e.g. "Detail, tire rotation" — site currently says no oil changes
+  keysRequired: null,                              // true / false
+  servicesWhileAway: null,                         // note: shop site says no oil changes
   launchDate: null
 };
 
-// Firebase web-app config: Firebase console → Project settings → Your apps → Web app.
-// Leave null until then; the reserve form falls back to call/email.
+// Firebase web-app config. Firebase console → Project settings → Your apps → Web.
+// While null, the site works as a brochure and account pages explain what's missing.
 window.FIREBASE_CONFIG = null;
-/* Example:
+/*
 window.FIREBASE_CONFIG = {
   apiKey: "...", authDomain: "dynamicairportparking.firebaseapp.com",
   projectId: "dynamicairportparking", storageBucket: "dynamicairportparking.appspot.com",
   messagingSenderId: "...", appId: "..."
 };
 */
+
+// Payment keys — PUBLIC keys only. Secret keys go in Firebase secrets (see README), never in this file.
+window.PAYMENTS = {
+  stripePublishableKey: null,   // pk_live_... / pk_test_...  → card, Cash App Pay (turn on in Stripe dashboard)
+  paypalClientId: null,         // PayPal REST app client id   → PayPal + Venmo buttons
+  currency: "USD"
+};

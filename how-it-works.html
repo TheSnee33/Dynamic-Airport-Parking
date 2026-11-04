@@ -4,35 +4,41 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How It Works — Dynamic Airport Parking</title>
-<meta name="description" content="Reserve, drop off at the shop, ride the shuttle to PVU, and pick up your car when you're back.">
+<meta name="description" content="Create an account, book, drop your car at the shop, ride the shuttle to PVU, and pick up your car when you're back.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body data-page="how">
-<div class="page-hero"><div class="wrap"><h1>How it works</h1><p>From reservation to pickup, here is exactly what to expect.</p></div></div>
+<div class="page-hero"><div class="wrap"><h1>How it works</h1><p>From booking to pickup, here's exactly what to expect.</p></div></div>
 
 <section class="block">
   <div class="wrap grid two">
-    <div class="card"><div class="num">1</div><h3>Reserve</h3>
-      <p>Book with the <a href="reserve.html">online form</a> or by phone/text at <span data-fill="phone"></span>. We confirm your spot by text or email.</p></div>
-    <div class="card"><div class="num">2</div><h3>Drop off</h3>
-      <p>Come to <span data-fill="address"></span> during drop-off hours (<span data-fill="hours"></span>). We log your vehicle and walk the car with you.</p>
+    <div class="card"><div class="step-num">1</div><h3>Book &amp; pay</h3>
+      <p>Create a free <a href="register.html">account</a>, choose your dates and save your vehicle. Pay in the secure window by card, Cash App, PayPal or Venmo.</p></div>
+    <div class="card"><div class="step-num">2</div><h3>Check in</h3>
+      <p>Bring your car to <span data-fill="address"></span> (<span data-fill="hours"></span>). We log it in and walk around it with you.</p>
       <p><strong>Keys:</strong> <span data-fill="keys"></span></p></div>
-    <div class="card"><div class="num">3</div><h3>Shuttle to PVU</h3>
+    <div class="card"><div class="step-num">3</div><h3>Shuttle to PVU</h3>
       <p>Vehicle: <span data-fill="shuttle-vehicle"></span><br>Hours: <span data-fill="shuttle-hours"></span><br>Early / late flights: <span data-fill="early-late"></span></p></div>
-    <div class="card"><div class="num">4</div><h3>Pickup</h3>
+    <div class="card"><div class="step-num">4</div><h3>Pick up</h3>
       <p>Text us when you land. The shuttle brings you back and your car is ready.</p></div>
   </div>
 </section>
 
 <section class="block alt">
-  <div class="wrap">
-    <h2>While you're away</h2>
-    <p>Services available: <span data-fill="services"></span></p>
-    <div class="notice"><strong>You approve everything.</strong> We text you a description and price for any work, and nothing starts until you reply yes.</div>
+  <div class="wrap grid split">
+    <div class="photo-frame"><img src="assets/img/shop-bay.svg" alt="Service bay with a car on a lift" loading="lazy"></div>
+    <div>
+      <p class="eyebrow">While you're away</p>
+      <h2>You approve everything</h2>
+      <p>Services available: <span data-fill="services"></span></p>
+      <div class="notice"><strong>Nothing starts without your OK.</strong> We text a description and price for any work, and we wait for your reply.</div>
+    </div>
   </div>
 </section>
 
 <script src="assets/js/config.js"></script>
-<script src="assets/js/main.js"></script>
+<script type="module" src="assets/js/main.js"></script>
 </body>
 </html>

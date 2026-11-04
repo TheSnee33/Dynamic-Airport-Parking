@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Create an account — Dynamic Airport Parking</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="register">
+<div class="page-hero"><div class="wrap"><h1>Create your account</h1><p>Save your vehicle, track your bookings and pay securely.</p></div></div>
+
+<section class="block">
+  <div class="wrap">
+    <div id="unconfigured"></div>
+    <div class="form-card" id="card">
+      <div id="msg" class="msg" role="alert"></div>
+      <form id="form" novalidate>
+        <div><label for="name">Full name</label><input id="name" autocomplete="name" required></div>
+        <div class="row">
+          <div><label for="phone">Mobile phone</label><input id="phone" type="tel" autocomplete="tel" required placeholder="(801) 555-0123"></div>
+          <div><label for="email">Email</label><input id="email" type="email" autocomplete="email" required></div>
+        </div>
+        <div class="row">
+          <div><label for="pw">Password</label><input id="pw" type="password" autocomplete="new-password" minlength="8" required><div class="hint">At least 8 characters.</div></div>
+          <div><label for="pw2">Confirm password</label><input id="pw2" type="password" autocomplete="new-password" required></div>
+        </div>
+        <label class="check"><input type="checkbox" id="sms"> Text me updates about my bookings and my car (optional).</label>
+        <label class="check"><input type="checkbox" id="terms" required> I agree to the <a href="terms.html">terms &amp; policies</a>.</label>
+        <button class="btn block" type="submit" id="go">Create account</button>
+        <div class="form-foot">Already registered? <a href="login.html" id="to-login">Log in</a></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script src="assets/js/config.js"></script>
+<script type="module" src="assets/js/main.js"></script>
+<script type="module" src="assets/js/register.js"></script>
+</body>
+</html>
