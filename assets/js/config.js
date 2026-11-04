@@ -28,14 +28,14 @@ window.SITE = {
 
 // Firebase web-app config. Firebase console → Project settings → Your apps → Web.
 // While null, the site works as a brochure and account pages explain what's missing.
-window.FIREBASE_CONFIG = null;
-/*
 window.FIREBASE_CONFIG = {
-  apiKey: "...", authDomain: "dynamicairportparking.firebaseapp.com",
-  projectId: "dynamicairportparking", storageBucket: "dynamicairportparking.appspot.com",
-  messagingSenderId: "...", appId: "..."
+  apiKey: "AIzaSyBXIIXCAw8xO1rSO2Tb5A_Al6MNjWEVzhs",   // public by design; security comes from firestore.rules
+  authDomain: "dynamicairportparking.firebaseapp.com",
+  projectId: "dynamicairportparking",
+  storageBucket: "dynamicairportparking.firebasestorage.app",
+  messagingSenderId: "7172977429",
+  appId: "1:7172977429:web:ea3af0ebf623fdd7e9af1c"
 };
-*/
 
 // Payment keys — PUBLIC keys only. Secret keys go in Firebase secrets (see README), never in this file.
 window.PAYMENTS = {
