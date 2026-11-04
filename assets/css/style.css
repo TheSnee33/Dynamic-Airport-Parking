@@ -190,3 +190,17 @@ fieldset .row, fieldset > div { margin-bottom: 14px; }
 
 /* Hero alignment fix */
 .hero .wrap { width: 100%; }
+
+/* ── Centered layout (home hero + step cards) ── */
+.hero { text-align: center; justify-content: center; }
+.hero::after { background:
+  radial-gradient(ellipse 62% 70% at 50% 46%, rgba(13,17,23,.9) 0%, rgba(13,17,23,.72) 45%, rgba(13,17,23,.35) 100%),
+  linear-gradient(0deg, var(--bg) 0%, transparent 28%); }
+.hero h1 { max-width: 15ch; margin-left: auto; margin-right: auto; }
+.hero .lead { margin-left: auto; margin-right: auto; }
+.hero .cta, .hero .stat-row { justify-content: center; }
+.hero .chip { text-align: center; }
+/* Section intro above the step cards, and the cards' text under their numbers */
+section.block:has(.step-num) > .wrap > .eyebrow,
+section.block:has(.step-num) > .wrap > h2 { text-align: center; }
+.card:has(> .step-num), .card .body:has(> .step-num) { text-align: center; }
