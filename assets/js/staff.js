@@ -67,7 +67,7 @@ async function init() {
           ${r.flight ? "Flight: " + esc(r.flight) + " · " : ""}Keys: ${r.leavingKeys ? "<b>leaving keys</b>" : "keeping keys"}${r.notes ? `<br>Customer note: ${esc(r.notes)}` : ""}</div>
         <div class="staff-edit">
           <select data-status>${STATUSES.map(([k, t]) => `<option value="${k}"${k === r.status ? " selected" : ""}>${esc(t)}</option>`).join("")}</select>
-          <input data-note placeholder="Internal note (customers can't see this)" value="${esc(r.staffNote || "")}" maxlength="500">
+          <input data-note placeholder="Staff note (keep it customer-safe)" value="${esc(r.staffNote || "")}" maxlength="500">
           <button type="button" class="btn small" data-save>Save</button>
         </div></div>`;
     }).join("");
