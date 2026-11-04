@@ -97,7 +97,7 @@ section.alt { background: var(--bg-2); border-top: 1px solid var(--border); bord
 .card.photo { padding: 0; overflow: hidden; }
 .card.photo img { width: 100%; aspect-ratio: 16 / 10; object-fit: cover; }
 .card.photo .body { padding: 22px 24px 26px; }
-.step-num { width: 40px; height: 40px; border-radius: 50%; background: var(--red); color: #fff; font: 800 1.1rem Outfit, sans-serif; display: grid; place-items: center; margin-bottom: 14px; box-shadow: var(--shadow-red); }
+.step-num { width: 40px; margin-left: auto; margin-right: auto; height: 40px; border-radius: 50%; background: var(--red); color: #fff; font: 800 1.1rem Outfit, sans-serif; display: grid; place-items: center; margin-bottom: 14px; box-shadow: var(--shadow-red); }
 .photo-frame { border-radius: var(--radius-lg); overflow: hidden; border: 1px solid var(--border); box-shadow: var(--shadow); }
 .photo-frame img { width: 100%; aspect-ratio: 16 / 11; object-fit: cover; }
 ul.ticks { list-style: none; padding: 0; margin: 0 0 1.2em; }

@@ -19,7 +19,7 @@ document.body.insertAdjacentHTML("afterbegin", `
   <nav class="nav" id="nav">
     ${links.map(([h, t, k]) => `<a href="${h}"${k === page ? ' aria-current="page"' : ""}>${t}</a>`).join("")}
     <a id="nav-auth" href="login.html"${page === "login" ? ' aria-current="page"' : ""}>Log in</a>
-    <a class="btn" id="nav-cta" href="reserve.html">Book a stay</a>
+    <a class="btn" id="nav-cta" href="reserve.html">Book A Stay</a>
   </nav>
 </div></header>`);
 

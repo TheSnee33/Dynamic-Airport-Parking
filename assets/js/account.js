@@ -28,7 +28,7 @@ async function init() {
   $("p-sms").checked = !!c.smsOk;
   const vf = $("verify");
   if (user.emailVerified) vf.innerHTML = "✓ Email verified";
-  else { vf.innerHTML = `Email not verified yet. <button type="button" class="link-btn" id="resend">Resend link</button>`;
+  else { vf.innerHTML = `Email not verified yet. <button type="button" class="link-btn" id="resend">Resend Link</button>`;
     $("resend").onclick = async () => { try { await resendVerification(); say(msg, "ok", "Verification email sent."); } catch { say(msg, "err", "Couldn't send that right now."); } }; }
 
   $("profile").addEventListener("submit", async (e) => {
@@ -69,7 +69,7 @@ async function init() {
     const rows = s.docs.map((d) => ({ id: d.id, ...d.data() }))
       .sort((a, b) => (b.createdAt?.seconds || 0) - (a.createdAt?.seconds || 0));
     const box = $("reservations");
-    if (!rows.length) { box.innerHTML = `<div class="empty">No bookings yet.<br><a class="btn small" style="margin-top:14px" href="reserve.html">Book your first stay</a></div>`; return; }
+    if (!rows.length) { box.innerHTML = `<div class="empty">No bookings yet.<br><a class="btn small" style="margin-top:14px" href="reserve.html">Book Your First Stay</a></div>`; return; }
     box.innerHTML = rows.map((r) => {
       const paid = r.paymentStatus === "paid";
       const cancelled = r.status === "cancelled" || r.status === "cancel_requested";
@@ -80,8 +80,8 @@ async function init() {
           <div><span class="badge ${sBadge[0]}">${esc(sBadge[1])}</span> <span class="badge ${paid ? "ok" : "warn"}">${paid ? "Paid" : "Unpaid"}</span></div></div>
         <div class="meta">Drop-off ${esc(fmtDate(r.dropOff))}<br>Return ${esc(fmtDate(r.pickup))} · ${esc(r.days)} day${r.days === 1 ? "" : "s"}${r.quotedTotal != null ? " · est. " + usd(r.quotedTotal) : ""}</div>
         <div class="actions">
-          ${!paid && !cancelled ? `<button class="btn small" data-pay="${r.id}" data-label="${esc((v.year || "") + " " + (v.make || "") + " " + (v.model || ""))}">Pay now</button>` : ""}
-          ${!cancelled && r.status !== "completed" ? `<button class="btn small ghost" data-cancel="${r.id}">Request cancellation</button>` : ""}
+          ${!paid && !cancelled ? `<button class="btn small" data-pay="${r.id}" data-label="${esc((v.year || "") + " " + (v.make || "") + " " + (v.model || ""))}">Pay Now</button>` : ""}
+          ${!cancelled && r.status !== "completed" ? `<button class="btn small ghost" data-cancel="${r.id}">Request Cancellation</button>` : ""}
         </div></div>`;
     }).join("");
     box.querySelectorAll("[data-pay]").forEach((b) => b.onclick = () => openPay({ reservationId: b.dataset.pay, label: b.dataset.label, onPaid: loadReservations }));
