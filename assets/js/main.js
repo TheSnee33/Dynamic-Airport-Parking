@@ -29,7 +29,7 @@ document.body.insertAdjacentHTML("beforeend", `
     <div><h4>Dynamic Airport Parking</h4><p>Leave your car with a body shop family, ride the shuttle to ${S.airport}, and come home to it waiting.</p></div>
     <div><h4>Explore</h4><ul>${links.map(([h, t]) => `<li><a href="${h}">${t}</a></li>`).join("")}<li><a href="reserve.html">Book a stay</a></li><li><a href="account.html">My account</a></li></ul></div>
     <div><h4>Contact</h4><ul><li data-fill="phone-link"></li><li data-fill="email-link"></li><li data-fill="address"></li><li data-fill="hours"></li></ul></div>
-    <div><h4>A service of</h4><p><a href="${S.parentUrl}">${S.parent}</a><br>Provo's neighborhood body shop since 1979.</p><p><a href="terms.html">Terms &amp; policies</a></p></div>
+    <div><h4>A service of</h4><p><a href="${S.parentUrl}">${S.parent}</a><br>Provo's neighborhood body shop.</p><p><a href="terms.html">Terms &amp; policies</a></p></div>
   </div>
   <div class="fine">© ${new Date().getFullYear()} ${S.name}. All rights reserved.</div>
 </div></footer>`);
