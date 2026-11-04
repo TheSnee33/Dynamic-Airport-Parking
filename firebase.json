@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "public": ".",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "README.md", "firestore.rules", "firestore.indexes.json"],
+    "cleanUrls": true,
+    "headers": [
+      { "source": "**/*.@(css|js)", "headers": [{ "key": "Cache-Control", "value": "public, max-age=3600" }] }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

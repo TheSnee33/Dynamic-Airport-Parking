@@ -1,0 +1,114 @@
+/* Dynamic Airport Parking — shared styles */
+:root {
+  --navy: #0e1b2c;
+  --navy-2: #16283f;
+  --amber: #f5a524;
+  --amber-dark: #d98a0b;
+  --ink: #1b2430;
+  --muted: #5d6b7c;
+  --line: #e3e8ee;
+  --bg: #f6f8fb;
+  --white: #fff;
+  --radius: 14px;
+  --shadow: 0 8px 28px rgba(14, 27, 44, .12);
+  --max: 1080px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0; color: var(--ink); background: var(--white);
+  font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+img { max-width: 100%; display: block; }
+a { color: var(--navy-2); }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 20px; }
+h1, h2, h3 { line-height: 1.2; margin: 0 0 .5em; color: var(--navy); }
+h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
+h2 { font-size: clamp(1.5rem, 3.2vw, 2.1rem); }
+h3 { font-size: 1.15rem; }
+p { margin: 0 0 1em; }
+.lead { font-size: 1.15rem; color: var(--muted); }
+.eyebrow { text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 700; color: var(--amber-dark); }
+
+/* Header */
+.site-header { background: var(--navy); color: #fff; position: sticky; top: 0; z-index: 50; }
+.site-header .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+.brand { color: #fff; text-decoration: none; font-weight: 800; letter-spacing: .02em; display: flex; align-items: center; gap: 10px; }
+.brand .mark { width: 30px; height: 30px; border-radius: 8px; background: var(--amber); color: var(--navy); display: grid; place-items: center; font-weight: 900; }
+.nav { display: flex; gap: 22px; align-items: center; }
+.nav a { color: #d6deea; text-decoration: none; font-weight: 600; font-size: .95rem; }
+.nav a:hover, .nav a[aria-current="page"] { color: #fff; }
+.nav .btn { color: var(--navy); }
+.nav-toggle { display: none; background: none; border: 0; color: #fff; font-size: 1.6rem; cursor: pointer; }
+@media (max-width: 760px) {
+  .nav-toggle { display: block; }
+  .nav { display: none; position: absolute; top: 64px; left: 0; right: 0; background: var(--navy); flex-direction: column; padding: 18px 20px 24px; gap: 16px; align-items: flex-start; }
+  .nav.open { display: flex; }
+}
+
+/* Buttons */
+.btn { display: inline-block; background: var(--amber); color: var(--navy); font-weight: 800; padding: 12px 22px; border-radius: 999px; text-decoration: none; border: 0; cursor: pointer; font-size: 1rem; }
+.btn:hover { background: var(--amber-dark); }
+.btn.ghost { background: transparent; color: #fff; border: 2px solid rgba(255,255,255,.5); }
+.btn.ghost:hover { background: rgba(255,255,255,.1); }
+.btn.dark { background: var(--navy); color: #fff; }
+
+/* Hero */
+.hero { background: linear-gradient(160deg, var(--navy) 0%, var(--navy-2) 100%); color: #fff; padding: 80px 0 90px; }
+.hero h1 { color: #fff; max-width: 15ch; }
+.hero .lead { color: #c3cfde; max-width: 52ch; }
+.hero .cta { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 28px; }
+.page-hero { background: var(--navy); color: #fff; padding: 52px 0; }
+.page-hero h1 { color: #fff; font-size: clamp(1.8rem, 4vw, 2.5rem); margin: 0 0 .3em; }
+.page-hero p { color: #c3cfde; margin: 0; max-width: 60ch; }
+
+/* Sections */
+section.block { padding: 64px 0; }
+section.alt { background: var(--bg); }
+.grid { display: grid; gap: 22px; }
+.grid.three { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.grid.two { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+.card { background: #fff; border: 1px solid var(--line); border-radius: var(--radius); padding: 26px; box-shadow: var(--shadow); }
+.card .num { width: 38px; height: 38px; border-radius: 50%; background: var(--amber); color: var(--navy); font-weight: 900; display: grid; place-items: center; margin-bottom: 14px; }
+.price { font-size: 2.6rem; font-weight: 900; color: var(--navy); line-height: 1; }
+.price small { font-size: 1rem; font-weight: 600; color: var(--muted); }
+.compare { background: var(--navy); color: #fff; border-radius: var(--radius); padding: 28px; }
+.compare h3 { color: #fff; }
+.compare p { color: #c3cfde; margin: 0; }
+ul.ticks { list-style: none; padding: 0; margin: 0 0 1em; }
+ul.ticks li { padding-left: 28px; position: relative; margin-bottom: .55em; }
+ul.ticks li::before { content: "✓"; position: absolute; left: 0; color: var(--amber-dark); font-weight: 900; }
+.tbd { background: #fff4d9; border-bottom: 2px dashed var(--amber-dark); padding: 0 4px; border-radius: 3px; }
+.notice { background: #fff4d9; border-left: 4px solid var(--amber); padding: 14px 18px; border-radius: 8px; font-size: .95rem; }
+
+/* FAQ */
+details { border: 1px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 12px; background: #fff; }
+summary { cursor: pointer; font-weight: 700; color: var(--navy); }
+details[open] summary { margin-bottom: 8px; }
+
+/* Forms */
+form.reserve { display: grid; gap: 18px; }
+fieldset { border: 1px solid var(--line); border-radius: var(--radius); padding: 20px 22px 8px; margin: 0; background: #fff; }
+legend { font-weight: 800; color: var(--navy); padding: 0 8px; }
+.row { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); margin-bottom: 14px; }
+label { display: block; font-weight: 600; font-size: .92rem; margin-bottom: 4px; }
+input, select, textarea { width: 100%; font: inherit; padding: 11px 12px; border: 1px solid #c8d1dc; border-radius: 10px; background: #fff; }
+input:focus, select:focus, textarea:focus { outline: 3px solid rgba(245,165,36,.45); border-color: var(--amber-dark); }
+.check { display: flex; gap: 10px; align-items: flex-start; font-weight: 500; }
+.check input { width: auto; margin-top: 5px; }
+.form-msg { padding: 14px 18px; border-radius: 10px; display: none; }
+.form-msg.ok { display: block; background: #e6f6ec; color: #14532d; }
+.form-msg.err { display: block; background: #fdeaea; color: #7f1d1d; }
+
+/* Footer */
+.site-footer { background: var(--navy); color: #b6c3d3; padding: 44px 0 30px; font-size: .92rem; }
+.site-footer a { color: #e6edf6; }
+.site-footer .cols { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); margin-bottom: 26px; }
+.site-footer h4 { color: #fff; margin: 0 0 10px; }
+.site-footer ul { list-style: none; padding: 0; margin: 0; }
+.site-footer li { margin-bottom: 6px; }
+.fine { border-top: 1px solid rgba(255,255,255,.12); padding-top: 18px; font-size: .82rem; }
+
+/* Fixes */
+.grid.two { align-items: start; }
+.compare .tbd, .site-footer .tbd { color: var(--navy); }
